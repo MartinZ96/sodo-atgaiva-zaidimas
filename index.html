@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#efe2c8">
+  <title>Sodo atgaiva</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/ikona_192.png">
+  <link rel="apple-touch-icon" href="img/ikona_192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sodo atgaiva">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Pagrindinis ekranas: sodas + lygiai -->
+    <!-- Titulinis ekranas (rodomas atidarius programėlę) -->
+    <section id="screen-title" class="screen active">
+      <div class="tt-bg" id="tt-bg"></div>
+      <div class="tt-petals" id="tt-petals"></div>
+      <div class="tt-inner">
+        <div class="tt-logo">
+          <svg class="tt-orn" viewBox="0 0 240 60" aria-hidden="true">
+            <path d="M120 44 Q80 40 40 50 M120 44 Q160 40 200 50" stroke="#6f8f5a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <g fill="#7fa65a" stroke="#4c6a3c" stroke-width="1"><path d="M70 45 q-10 -14 6 -18 q2 12 -6 18z"/><path d="M52 48 q-12 -8 0 -16 q6 10 0 16z"/><path d="M170 45 q10 -14 -6 -18 q-2 12 6 18z"/><path d="M188 48 q12 -8 0 -16 q-6 10 0 16z"/></g>
+            <g transform="translate(120 30)"><g fill="#e9a3a8" stroke="#b9666f" stroke-width="1"><ellipse rx="9" ry="14" transform="rotate(0) translate(0 -10)"/><ellipse rx="9" ry="14" transform="rotate(72) translate(0 -10)"/><ellipse rx="9" ry="14" transform="rotate(144) translate(0 -10)"/><ellipse rx="9" ry="14" transform="rotate(216) translate(0 -10)"/><ellipse rx="9" ry="14" transform="rotate(288) translate(0 -10)"/></g><circle r="8" fill="#f3b8bd" stroke="#b9666f"/><circle r="4" fill="#f3d27a"/></g>
+          </svg>
+          <h1 class="tt-title">Sodo atgaiva</h1>
+          <p class="tt-sub">Atgaivink apleistą sodą kartu su Pūkiu</p>
+        </div>
+        <div class="tt-pukis" id="tt-pukis"></div>
+        <button class="btn primary big tt-play" id="tt-play">Žaisti</button>
+        <div class="tt-status" id="tt-status"></div>
+      </div>
+    </section>
+
+    <section id="screen-home" class="screen">
+      <header class="home-top">
+        <h1><span class="logo-leaf">❦</span>Sodo atgaiva</h1>
+        <div class="pill lives" id="home-lives"></div>
+        <div class="pill star" id="home-stars">★ 0</div>
+        <button class="icon-btn" id="btn-sound" aria-label="Nustatymai">⚙️</button>
+      </header>
+      <!-- Skiltys -->
+      <div class="hpanel active" id="hp-sodas">
+        <div class="zone-tabs" id="zone-tabs"></div>
+        <div class="garden-card"><div id="garden"></div></div>
+        <div id="task-card" class="card task"></div>
+        <button class="btn primary big" id="btn-play">Žaisti</button>
+        <div class="card dlv" id="dlv-card"></div>
+        <div class="card dlv tm" id="tm-card"></div>
+        <div class="card event" id="event-card"></div>
+      </div>
+      <div class="hpanel" id="hp-lygiai">
+        <h2 class="section-title">Lygiai</h2>
+        <div id="level-map"></div>
+      </div>
+      <div class="hpanel" id="hp-uzduotys">
+        <div class="card daily" id="daily-card"></div>
+        <h2 class="section-title">🏆 Pasiekimai</h2>
+        <div class="card ach-list" id="ach-list"></div>
+      </div>
+      <div class="hpanel" id="hp-spinta">
+        <div class="seg" id="spinta-seg"><button class="on" data-seg="ward">👒 Spinta</button><button data-seg="album">📖 Albumas<i class="dot"></i></button></div>
+        <div class="card ward-box" id="ward-box"></div>
+        <div class="card album-box hidden" id="album-box"></div>
+      </div>
+      <nav class="tabbar" id="tabbar">
+        <button class="tab on" data-tab="sodas"><span class="ti">🌳</span><span>Sodas</span><i class="dot"></i></button>
+        <button class="tab" data-tab="lygiai"><span class="ti">🗺️</span><span>Lygiai</span><i class="dot"></i></button>
+        <button class="tab" data-tab="uzduotys"><span class="ti">🎁</span><span>Užduotys</span><i class="dot"></i></button>
+        <button class="tab" data-tab="spinta"><span class="ti">👒</span><span>Spinta</span><i class="dot"></i></button>
+      </nav>
+    </section>
+
+    <!-- Žaidimo ekranas -->
+    <section id="screen-game" class="screen">
+      <header class="game-top">
+        <button class="icon-btn" id="btn-back" aria-label="Atgal">‹</button>
+        <div class="moves"><span id="moves">0</span><small>ėjimai</small></div>
+        <div class="goals" id="goals"></div>
+      </header>
+      <div class="scorebar">
+        <div class="score-text"><small id="level-title"></small>Taškai <b id="score">0</b></div>
+        <div class="progress">
+          <div id="progress-fill"></div>
+          <i class="mark" id="mark-0">★</i><i class="mark" id="mark-1">★</i><i class="mark" id="mark-2">★</i>
+        </div>
+      </div>
+      <div id="board-wrap"><div id="board"></div></div>
+      <footer class="game-bottom">
+        <div class="g-avatar" id="g-avatar"></div>
+        <div class="g-bubble" id="g-bubble"></div>
+        <div class="boosters">
+          <button class="booster" id="b-shovel" aria-label="Kastuvėlis"><span class="ico"></span><span class="count" id="cnt-shovel">0</span></button>
+          <button class="booster" id="b-can" aria-label="Laistytuvas"><span class="ico"></span><span class="count" id="cnt-can">0</span></button>
+          <button class="booster" id="b-rake" aria-label="Grėblys"><span class="ico"></span><span class="count" id="cnt-rake">0</span></button>
+        </div>
+      </footer>
+      <div id="toast"></div>
+    </section>
+
+    <div id="modal" class="modal hidden"><div class="modal-card" id="modal-card"></div></div>
+
+    <div id="dialog" class="dialog hidden">
+      <div class="dlg-box">
+        <div class="dlg-portrait"></div>
+        <div class="dlg-name">Pūkis</div>
+        <div class="dlg-text" data-noi18n></div>
+        <div class="dlg-next">▸</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/lang-en.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/garden.js"></script>
+  <script src="js/ambient.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/daily.js"></script>
+  <script src="js/telemetry.js"></script>
+  <script src="js/ads.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/native.js"></script>
+</body>
+</html>

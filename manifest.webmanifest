@@ -1,0 +1,17 @@
+{
+  "name": "Sodo atgaiva",
+  "short_name": "Sodo atgaiva",
+  "description": "Jaukus sodo žaidimas: sutvarkyk lysves ir atgaivink sodą kartu su Pūkiu.",
+  "lang": "lt",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#efe2c8",
+  "theme_color": "#efe2c8",
+  "icons": [
+    { "src": "img/ikona_192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/ikona_512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/ikona_maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
